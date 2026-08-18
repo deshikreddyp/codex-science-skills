@@ -1,0 +1,4 @@
+interface:
+  display_name: "CSF Flow Postprocess"
+  short_description: "Compute CSF flow, pressure, area, displacement"
+  default_prompt: "Use $csf-flow-postprocess to compute requested CSF flow slice metrics and publication-ready plots."

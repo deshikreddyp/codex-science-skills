@@ -1,0 +1,4 @@
+interface:
+  display_name: "Drug Transport Postprocess"
+  short_description: "Compute CSF drug concentration slice profiles"
+  default_prompt: "Use $drug-transport-postprocess to compute c_avg and c_net profiles and plots from my simulation results."

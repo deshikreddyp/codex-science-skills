@@ -1,0 +1,4 @@
+interface:
+  display_name: "Steady Streaming Postprocess"
+  short_description: "Compute and plot FSI/RW steady streaming"
+  default_prompt: "Use $steady-streaming-postprocess to compute Eulerian or Lagrangian steady streaming and section-wise strength profiles."

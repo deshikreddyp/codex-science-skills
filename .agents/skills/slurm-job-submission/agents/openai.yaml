@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slurm Job Submission"
+  short_description: "Create and review reliable HPC job scripts"
+  default_prompt: "Use $slurm-job-submission to create and validate a Slurm script for my simulation."

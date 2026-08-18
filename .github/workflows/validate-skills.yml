@@ -22,3 +22,4 @@ jobs:
       - run: python .agents/skills/drug-transport-postprocess/scripts/test_synthetic.py
       - run: python .agents/skills/csf-flow-postprocess/scripts/test_xdmf_end_to_end.py
       - run: python .agents/skills/drug-transport-postprocess/scripts/test_xdmf_end_to_end.py
+      - run: python .agents/skills/slurm-job-submission/scripts/test_validate_slurm_script.py

@@ -9,6 +9,7 @@ Private source-of-truth repository for D. Putluru's reusable Codex workflows.
 - `steady-streaming-postprocess`: Eulerian, ALE, and Lagrangian steady-streaming analysis.
 - `paper-style-rewrite`: scientific-paper rewriting under Gomez Lab style gates.
 - `slurm-job-submission`: reliable RCAC Slurm scripts, validation, submission, and troubleshooting.
+- `tex-notes`: compact `short-note-tex` briefs and explanatory `long-note-tex` scientific documentation.
 
 ## Local installation
 
@@ -39,6 +40,7 @@ python .agents/skills/drug-transport-postprocess/scripts/test_synthetic.py
 python .agents/skills/csf-flow-postprocess/scripts/test_xdmf_end_to_end.py
 python .agents/skills/drug-transport-postprocess/scripts/test_xdmf_end_to_end.py
 python .agents/skills/slurm-job-submission/scripts/test_validate_slurm_script.py
+
 # Optional on hosts with DOLFIN/FEniCS:
 python .agents/skills/csf-flow-postprocess/scripts/test_fenics_h5_end_to_end.py
 python .agents/skills/drug-transport-postprocess/scripts/test_fenics_h5_end_to_end.py

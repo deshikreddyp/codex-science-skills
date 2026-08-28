@@ -1,0 +1,170 @@
+\documentclass[10pt]{article}
+
+\usepackage[letterpaper,margin=0.62in,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor,microtype,enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{routeblue}{RGB}{24,67,112}
+\definecolor{routegreen}{RGB}{37,104,71}
+\definecolor{routegray}{RGB}{75,83,92}
+\definecolor{routeorange}{RGB}{153,82,20}
+
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\R}{\mathbb R}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\MethodTitle}[2]{%
+  {\Large\bfseries\color{routeblue}#1}\hfill
+  {\normalsize\bfseries\color{routegray}#2}\par\vspace{2pt}
+  \hrule\vspace{5pt}}
+
+% Replace these three fields.
+\newcommand{\NoteTitle}{Short scientific methods briefing}
+\newcommand{\NoteSubtitle}{Consistent equations, implementation requirements, and evidence gates}
+\newcommand{\NoteStatus}{Discussion draft --- \today}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.5pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+\setlength{\jot}{2pt}
+\setlist[itemize]{leftmargin=1.18em,itemsep=1.5pt,topsep=2pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.45em,itemsep=1.5pt,topsep=2pt,parsep=0pt}
+\renewcommand{\arraystretch}{1.10}
+\raggedbottom
+\pagestyle{plain}
+
+\begin{document}
+\small
+
+% ---------- Overview page ----------
+\begin{center}
+  {\LARGE\bfseries\color{routeblue}\NoteTitle}\\[3pt]
+  {\large\NoteSubtitle}\\[4pt]
+  {\normalsize\NoteStatus}
+\end{center}
+\vspace{-3pt}
+
+\textbf{Objective.} State the prediction, inference, or decision problem in two or three sentences. Name the reference truth and the intended deployment regime.
+
+\textbf{Common forward model.} Define the state $u(\vect x,t)$, parameter vector $\theta$, flux $\vect F$, source $s$, domain $\Omega$, initial state $u_0$, and boundary operator $\mathcal B$:
+\begin{equation}
+ \partial_t u+\nabla\cdot\vect F(u,\nabla u;\theta)=s(u,\vect x,t;\theta),
+ \quad u(\vect x,0)=u_0(\vect x),
+ \quad \mathcal B[u]=g\ \text{on }\partial\Omega .
+ \label{eq:reference-model}
+\end{equation}
+Explain whether Eq.~\eqref{eq:reference-model} is exact, a candidate reduction, or a closure.
+
+\textbf{Consistent notation.}
+\begin{center}
+\begin{tabularx}{0.96\textwidth}{L{0.18\textwidth}Y}
+\toprule
+Symbol & Meaning and units \\
+\midrule
+$\vect x,t$ & Spatial position and physical time. \\
+$u,u_0$ & State and initial state; distinguish intensive and extensive forms if relevant. \\
+$\theta$ & Known or inferred model coefficients; identify which components are positive or spatially varying. \\
+$\vect F,s$ & Conservative flux and volumetric/source contribution. \\
+$\mathcal H[u]$ & Observation or output operator used for comparison with data. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Method map.}
+\begin{center}
+\begin{tabularx}{0.98\textwidth}{>{\bfseries\raggedright\arraybackslash}p{0.18\textwidth}Y Y}
+\toprule
+Method & Scientific question & Primary output \\
+\midrule
+Method A & What is retained and what is reduced? & State, field, or quantity of interest. \\
+Method B & Which correction, coefficient, or operator is inferred? & Prediction and uncertainty, if applicable. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Decision order.} State which method is the first test, what evidence advances the project, and what failure or independent need justifies the next method.
+
+% ---------- Duplicate this page once per method ----------
+\clearpage
+\MethodTitle{Method A: descriptive name}{Primary role}
+
+\textbf{Purpose.} Explain the method's job and what information it intentionally retains or discards.
+
+\textbf{Forward equation.} Write the complete forward problem, not only its differential operator:
+\begin{equation}
+ \boxed{\mathcal M\,\partial_t q+\mathcal A(q;\theta)=f(t;\theta),
+ \qquad q(0)=q_0,\qquad \mathcal B_q[q]=g_q.}
+ \label{eq:method-a}
+\end{equation}
+Define $q$, $\mathcal M$, $\mathcal A$, $f$, $q_0$, and the boundary data. Explain each non-obvious term and mark fitted closures explicitly.
+
+\textbf{Inputs and outputs.} List known geometry, coefficients, forcing, initial state, boundary conditions, and requested outputs. If an observation map is used, write
+\begin{equation}
+ y=\mathcal H[q]+\varepsilon
+\end{equation}
+and define the error or discrepancy model rather than calling all mismatch noise.
+
+\textbf{Implementation requirements.}
+\begin{itemize}
+ \item Identify the required data products, metadata, and numerical operators.
+ \item State conservation, positivity, uniform-state, stability, or dimensional checks.
+ \item Name the independent-case and full-rollout validation needed for acceptance.
+\end{itemize}
+
+\textbf{Merit and risk.} Give a realistic assessment of physical fidelity, implementation effort, CPU/GPU needs, likely accuracy regime, and principal failure mode. State the evidence threshold for adding complexity.
+
+% ---------- A second method page shows the comparison pattern ----------
+\clearpage
+\MethodTitle{Method B: descriptive name}{Alternative or escalation}
+
+\textbf{Purpose.} State why this method exists after Method A and which documented residual or unmet need it addresses.
+
+\textbf{Forward or learned map.}
+\begin{align}
+ \dot{\vect a}&=\vect f_r(\vect a,\mu,t;\theta),
+ &\vect a(0)&=\mathcal E[u_0],\label{eq:reduced-state}\\
+ \widehat u(\vect x,t)&=\mathcal D[\vect a(t)] .
+\end{align}
+Define the encoder $\mathcal E$, decoder $\mathcal D$, reduced state $\vect a$, parameters $\mu$, and learned or projected coefficients $\theta$.
+
+\textbf{Evidence and constraints.} Identify invariant constraints, training-case separation, forecast horizon, and out-of-distribution conditions. Separate one-step fit from autonomous rollout accuracy.
+
+\textbf{Implementation requirements.}
+\begin{itemize}
+ \item Give the smallest credible baseline and the next escalation only if it fails.
+ \item State offline data, memory, CPU/GPU, and online evaluation requirements.
+ \item Define failure in observable scientific quantities, not only training loss.
+\end{itemize}
+
+\textbf{Merit and risk.} Explain when this method can outperform Method A, what guarantees are lost, and how confidence should be calibrated before validation.
+
+% ---------- Optional final decision page ----------
+\clearpage
+\MethodTitle{Comparison and recommended sequence}{Decision page}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{0.18\textwidth}L{0.14\textwidth}Y Y}
+\toprule
+Method & Online cost & Principal merit & Present limitation \\
+\midrule
+Method A & Low/moderate & Physics or interpretability advantage. & State the evidence gap. \\
+Method B & Low after training & Flexibility or acceleration advantage. & State data and extrapolation risk. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Recommended sequence.}
+\begin{enumerate}
+ \item Establish data alignment, units, initial/boundary conditions, and numerical truth.
+ \item Implement the simplest conservative or otherwise invariant-preserving baseline.
+ \item Add parameters, closure, or learned capacity only after a held-out failure is diagnosed.
+ \item Validate complete cases and uninterrupted rollouts; report scientific errors and compute cost.
+\end{enumerate}
+
+\textbf{Evidence status.} End with a precise statement of what is demonstrated, what remains a hypothesis, and which data or experiment controls the next decision.
+
+\end{document}

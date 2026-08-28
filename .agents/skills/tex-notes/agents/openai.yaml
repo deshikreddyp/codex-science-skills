@@ -1,0 +1,4 @@
+interface:
+  display_name: "TeX Notes"
+  short_description: "Create polished short or long scientific TeX notes"
+  default_prompt: "Use $tex-notes to create a concise scientific note in short-note-tex mode."

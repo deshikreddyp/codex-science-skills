@@ -24,6 +24,15 @@ Create polished, self-contained scientific notes with consistent notation, reada
 7. Compile in a temporary directory with the available LaTeX engine, normally `pdflatex`, for at least two passes when cross-references are present. Fix fatal errors, undefined references, and overfull boxes. Inspect page boundaries for short-note-tex.
 8. Deliver the requested `.tex` source. Generate or retain a PDF only when the user asks for it. Verify the final source by reading it and preserve user file permissions.
 
+## Writing style
+
+- Write in clear, concise, natural English. Lead with the main answer, result, or action, and include only the background needed to understand it.
+- Use short, direct sentences and concrete verbs. Preserve important technical details and reasoning while removing repetition, filler, unnecessary qualifiers, corporate language, and vague transitions.
+- Use brief headings or bullets for complex material when they improve clarity, but avoid excessive formatting.
+- State conclusions plainly and uncertainty honestly. Make limitations, questions, action items, and deadlines easy to find. Never invent information or exaggerate confidence.
+- When rewriting user text, preserve its meaning and natural voice while improving grammar, structure, and clarity. Do not make it sound robotic, overly formal, or excessively polished.
+- End once the point is clear.
+
 ## Adaptation
 
 The assets are starting points, not forms to fill mechanically. Replace all sample content, remove unused packages and sections, and preserve the user's existing notation or house style when it is already coherent. Do not copy project-specific claims from prior notes into a new subject.
